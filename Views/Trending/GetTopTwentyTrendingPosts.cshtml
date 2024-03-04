@@ -1,0 +1,53 @@
+﻿@model List<PostModel>
+    <div style="text-align: center; margin-top: 20px;">
+        <h1 style="color: purple;">Trending Top Posts</h1>
+    </div>
+
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead style="color:white;Background:purple;">
+            <tr>
+                <th>No.</th>
+                <th>Post Name</th>
+                <th>Total Votes</th>
+                <th>Total Comments</th>
+                <th>URL</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var post in Model)
+            {
+                <tr>
+                    <td>@post.id</td>
+                    <td>@post.Title</td>
+                    <td>@post.Ups</td>
+                    <td>@post.Commnets</td>
+                    <td><a href="@post.Url">Link</a></td>
+                    <td>@post.timestamp.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    
+                </tr>
+                   
+                }
+        </tbody>
+    </table>
+    <div class="col-md-4">
+        <a href="@Url.Action("GenerateReport", "Trending")" title="Generate Report" class="btn btn-primary">
+            <i class="bi bi-file-earmark-bar-graph"></i> Generate Report
+        </a>
+
+        <a href="@Url.Action("Index","Trending")" title="Back" class="btn btn-primary">
+            <i class="bi bi-file-earmark-bar-graph"></i> Back
+        </a>
+    </div>
+    
+
+
+}
+else
+{
+    <p>No trending posts available.</p>
+}
+

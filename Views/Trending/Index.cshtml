@@ -1,0 +1,53 @@
+﻿@model List<TrendingPostViewModel>
+
+
+    <div style="text-align: center; margin-top: 20px;">
+        <h1 style="color: purple;">HepMil Media Group</h1>
+    </div>
+
+
+
+
+    <div style="text-align: center; margin-top: 20px;">
+        <p style="color:purple">Once on Reddit, navigate to the top twenty trending posts section within 24 hours</p>
+        <a asp-controller="Trending" asp-action="GetTopTwentyTrendingPosts" class="btn btn-circle btn-lg" target="_blank" style="background-color: purple; color: white;">Check Trending Memes</a>
+    </div>
+
+
+    <h3 style="color: purple;">Top Hottest Memes on Reddit</h3>
+
+
+    @if (Model != null && Model.Any())
+    { 
+        <table class="table">
+            <thead style="color:white;Background:purple;">
+                <tr>
+                    <th>No</th>
+                    <th>Post Name</th>
+                    <th>Total Votes</th>
+                    <th>Total Comments</th>
+                    <th>URL</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+             @for(int i = 0; i < Model.Count; i++)
+                 { 
+                    <tr>
+                        <td>@(i+1)</td>                       
+                        <td>@Model[i].PostName</td>
+                        <td>@Model[i].votes</td>
+                        <td>@(Model[i].comments ?? 0)</td>
+                        <td><a href="@Model[i].URL">Link</a></td>
+                        <td>@Model[i].TimeStamp.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    </tr>
+                  
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No trending posts available.</p>
+    }
+

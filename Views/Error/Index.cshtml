@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Error Page";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error  Page</title>
+</head>
+<body>
+    <h1 style="color: red;">Error!</h1>
+    <h1>@ViewData["ErrorMessage"]</h1>
+    <form action="/Trending/Index" method="get">
+        <button type="submit">Back</button>
+    </form>
+</body>
+</html>

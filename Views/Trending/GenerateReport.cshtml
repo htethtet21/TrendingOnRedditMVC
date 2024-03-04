@@ -1,0 +1,45 @@
+﻿@model byte[]
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generated Report</title>
+</head>
+<body>
+    <iframe src="data:application/pdf;base64,@(Convert.ToBase64String(Model))" width="100%" height="600px"></iframe>
+
+    
+    <div class="col-md-6 m-3">
+        <div style="display: inline-block; vertical-align: middle;">
+            <img id="telegramLogo" src="https://telegram.org/img/t_logo.png" alt="Telegram" width="32" height="32">
+            <span style="margin-left: 5px; color: blue;">Share HelpMil Telegram bot</span>
+        </div>
+        <a href="@Url.Action("Index","Trending")" title="Back" class="btn btn-primary" style="display: inline-block; vertical-align: middle;">
+            <i class="bi bi-file-earmark-bar-graph"></i> Back
+        </a>
+    </div>
+
+    <script>function sendTelegramMessage() {
+            fetch('/Trending/SendTelegramPDF', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({})
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert(data.message); 
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+        }
+        document.getElementById('telegramLogo').addEventListener('click', sendTelegramMessage);</script>
+</body>
+</html>
